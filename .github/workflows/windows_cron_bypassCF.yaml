@@ -21,7 +21,7 @@ jobs:
       WEBSITE: ${{ secrets.WEBSITE_appin }}
 
     steps:
-      - uses: actions/checkout@v3 # 检出你的仓库
+      - uses: actions/checkout@v3 # 检出仓库
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
         with:

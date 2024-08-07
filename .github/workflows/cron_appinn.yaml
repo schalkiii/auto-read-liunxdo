@@ -17,9 +17,9 @@ jobs:
 
     env:
       # 在作业级别设置环境变量
-      USERNAMES: ${{ secrets.USERNAMES_APPINN}}
-      PASSWORDS: ${{ secrets.PASSWORDS_APPINN}}
-      WEBSITE: ${{ secrets.WEBSITE_APPINN}}
+      USERNAMES: ${{ secrets.USERNAMES_APPINN }}
+      PASSWORDS: ${{ secrets.PASSWORDS_APPINN }}
+      WEBSITE: ${{ secrets.WEBSITE_APPINN }}
 
     steps:
       - uses: actions/checkout@v3 # 检出仓库
