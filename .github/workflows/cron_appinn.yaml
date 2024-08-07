@@ -1,4 +1,4 @@
-name: cron_linuxdo
+name: cron_appinn
 
 on:
   schedule:
@@ -30,7 +30,7 @@ jobs:
       - name: Load environment variables
         id: load-env
         run: |
-          if [ -z "${{ secrets.USERNAMES }}" ] || [ "${{ secrets.USERNAMES }}" == "" ]; then
+          if [ -z "${{ secrets.USERNAMES_APPINN }}" ] || [ "${{ secrets.USERNAMES_APPINN }}" == "" ]; then
             echo "Loading environment variables from .env file"
             set -a
             source .env
@@ -40,9 +40,9 @@ jobs:
             echo "WEBSITE=${WEBSITE}" >> $GITHUB_ENV
           else
             echo "Using secrets"
-            echo "USERNAMES=${{ secrets.USERNAMES }}" >> $GITHUB_ENV
-            echo "PASSWORDS=${{ secrets.PASSWORDS }}" >> $GITHUB_ENV
-            echo "WEBSITE=${{ secrets.WEBSITE }}" >> $GITHUB_ENV
+            echo "USERNAMES=${{ secrets.USERNAMES_APPINN }}" >> $GITHUB_ENV
+            echo "PASSWORDS=${{ secrets.PASSWORDS_APPINN }}" >> $GITHUB_ENV
+            echo "WEBSITE=${{ secrets.WEBSITE_APPINN }}" >> $GITHUB_ENV
           fi
 
       - name: Run a script
