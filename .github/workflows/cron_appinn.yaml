@@ -8,12 +8,18 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     timeout-minutes: 20 # 设置作业超时时间为20分钟
 
     strategy:
       matrix:
         node-version: [20.x]
+
+    env:
+      # 在作业级别设置环境变量
+      USERNAMES: ${{ secrets.USERNAMES_APPINN}}
+      PASSWORDS: ${{ secrets.PASSWORDS_APPINN}}
+      WEBSITE: ${{ secrets.WEBSITE_APPINN}}
 
     steps:
       - uses: actions/checkout@v3 # 检出仓库
@@ -21,29 +27,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-
       - name: Install dependencies
-        run: |
-          npm install
-          sudo apt install -y xvfb
-
-      - name: Load environment variables
-        id: load-env
-        run: |
-          if [ -z "${{ secrets.USERNAMES_APPINN }}" ] || [ "${{ secrets.USERNAMES_APPINN }}" == "" ]; then
-            echo "Loading environment variables from .env file"
-            set -a
-            source .env
-            set +a
-            echo "USERNAMES=${USERNAMES}" >> $GITHUB_ENV
-            echo "PASSWORDS=${PASSWORDS}" >> $GITHUB_ENV
-            echo "WEBSITE=${WEBSITE}" >> $GITHUB_ENV
-          else
-            echo "Using secrets"
-            echo "USERNAMES=${{ secrets.USERNAMES_APPINN }}" >> $GITHUB_ENV
-            echo "PASSWORDS=${{ secrets.PASSWORDS_APPINN }}" >> $GITHUB_ENV
-            echo "WEBSITE=${{ secrets.WEBSITE_APPINN }}" >> $GITHUB_ENV
-          fi
-
+        run: npm install # 安装 package.json 中的依赖项
       - name: Run a script
-        run: xvfb-run node bypasscf.js
+        run: node bypasscf.js # 替换为你想运行的脚本的实际名称
