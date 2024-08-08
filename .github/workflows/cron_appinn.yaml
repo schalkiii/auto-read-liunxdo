@@ -29,10 +29,14 @@ jobs:
           node-version: ${{ matrix.node-version }}
 
       - name: Echo environment variables
+        shell: cmd
         run: |
-          echo "USERNAMES: $USERNAMES"
-          echo "PASSWORDS: $PASSWORDS"
-          echo "WEBSITE: $WEBSITE"
+          if defined USERNAMES (echo USERNAMES is set) else (echo USERNAMES is not set)
+          if defined PASSWORDS (echo PASSWORDS is set) else (echo PASSWORDS is not set)
+          if defined WEBSITE (echo WEBSITE is set) else (echo WEBSITE is not set)
+          echo USERNAMES: %USERNAMES%
+          echo PASSWORDS: %PASSWORDS%
+          echo WEBSITE: %WEBSITE%
 
       - name: Install dependencies
         run: npm install # 安装 package.json 中的依赖项
