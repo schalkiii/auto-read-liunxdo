@@ -27,6 +27,13 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
+
+      - name: Echo environment variables
+        run: |
+          echo "USERNAMES: $USERNAMES"
+          echo "PASSWORDS: $PASSWORDS"
+          echo "WEBSITE: $WEBSITE"
+
       - name: Install dependencies
         run: npm install # 安装 package.json 中的依赖项
       - name: Run a script
